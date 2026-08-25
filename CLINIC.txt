@@ -1,0 +1,61 @@
+ADD TO QUEUE
+
+BEGIN
+    INPUT patientName
+    INPUT patientAge
+    INPUT reasonForVisit
+    INPUT patientType
+
+IF patientName IS EMPTY OR patientAge IS EMPTY OR patientType IS EMPTY THEN
+        DISPLAY "Error: Please fill in all required fields."
+        EXIT MODULE
+    ENDIF
+
+SET queueCounter = queueCounter + 1
+    SET queueNumber = "Q" + FORMAT_TO_3_DIGITS(queueCounter) 
+
+SWITCH patientType
+        CASE "Emergency":
+            SET priority = "EMERGENCY"
+        CASE "Senior":
+            SET priority = "SENIOR PRIORITY"
+        CASE "Pregnant":
+            SET priority = "PRIORITY"
+        CASE "Regular":
+            SET priority = "REGULAR"
+        DEFAULT:
+            SET priority = "REGULAR"
+    ENDSWITCH
+
+DISPLAY "=== QUEUE TICKET ==="
+    DISPLAY "Queue Number: " + queueNumber
+    DISPLAY "Patient Name: " + patientName
+    DISPLAY "Patient Type: " + patientType
+    DISPLAY "Priority:     " + priority
+    DISPLAY "===================="
+
+END MODULE
+
+CLEAR
+
+BEGIN
+
+    SET txtPatientName = ""
+    SET txtPatientAge = ""
+    SET txtReasonForVisit = ""
+    SET cmbPatientType = DEFAULT / EMPTY
+
+    // Clear output display labels
+    SET lblQueueNumber = ""
+    SET lblPatientType = ""
+    SET lblPriority = ""
+
+    // Set focus back to the first input field
+    FOCUS txtPatientName
+
+END MODULE
+
+
+
+
+
